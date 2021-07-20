@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<meta title="Tilemap" package="com.sample.tilemap" version="1.0.0" company="Company Name" />
+	<app main="Main" path="Export" file="Tilemap" />
+
+	<source path="Source" />
+
+	<haxelib name="openfl" />
+
+	<assets path="Assets" rename="assets" />
+
+  <window fps="100" />
+</project>
