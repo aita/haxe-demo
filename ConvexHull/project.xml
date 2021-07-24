@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+
+	<meta title="ConvexHull" package="com.sample.convexhull" version="1.0.0" company="Company Name" />
+	<app main="Main" path="Export" file="ConvexHull" />
+
+	<source path="Source" />
+
+	<haxelib name="openfl" />
+	<haxelib name="hxmath" />
+
+	<assets path="Assets" rename="assets" />
+
+	<define name="HXMATH_USE_OPENFL_STRUCTURES" />
+</project>
