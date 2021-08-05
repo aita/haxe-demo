@@ -18,7 +18,7 @@ class ConvexHull {
 		var k = 0;
 		var n = points.length;
 		var loop = new Array<Point>();
-		loop.resize(2 * n);
+		loop.resize(n);
 
 		for (i in 0...n) {
 			while (k >= 2 && crossProduct(loop[k - 2], loop[k - 1], points[i]) <= 0) {
