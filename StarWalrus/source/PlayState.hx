@@ -3,21 +3,22 @@ package;
 import flixel.FlxObject;
 import flixel.FlxSprite;
 import flixel.FlxState;
+import flixel.group.FlxGroup;
 import flixel.input.mouse.FlxMouseEventManager;
 import flixel.text.FlxText;
 import flixel.util.FlxTimer;
-import source.ui.LevelEndScreen;
+import ui.GameHUD;
+import ui.LevelEndScreen;
 
 class PlayState extends FlxState
 {
 	private var background:FlxSprite;
-	private var txtScore:FlxText;
-	private var txtTime:FlxText;
+	private var gameHud:GameHUD;
 
+	private var enemyLayer:FlxGroup;
 	private var numEnemies:Int = 20;
 	private var score:Int = 0;
 	private var enemyPointValue:Int = 155;
-	private var enemies:Array<Enemy>;
 
 	private var levelTimer:FlxTimer;
 	private var levelTime:Int = 15;
@@ -31,19 +32,18 @@ class PlayState extends FlxState
 		background.loadGraphic(AssetPaths.gameBackground__png);
 		add(background);
 
-		txtScore = new FlxText(10, 10, 200, "Score: 0", 20);
-		txtTime = new FlxText(10, 30, 200, "Time: 0", 20);
-		add(txtScore);
-		add(txtTime);
+		enemyLayer = new FlxGroup();
+		add(enemyLayer);
 
-		enemies = new Array<Enemy>();
+		gameHud = new GameHUD();
+		add(gameHud);
+
 		var enemy:Enemy;
 		for (i in 0...numEnemies)
 		{
 			enemy = new Enemy();
-			add(enemy);
+			enemyLayer.add(enemy);
 
-			enemies.push(enemy);
 			FlxMouseEventManager.add(enemy, onEnemyMouseDown);
 		}
 
@@ -54,11 +54,6 @@ class PlayState extends FlxState
 	override public function destroy():Void
 	{
 		super.destroy();
-
-		for (i in 0...enemies.length)
-		{
-			FlxMouseEventManager.remove(enemies[i]);
-		}
 	}
 
 	override public function update(elapsed:Float)
@@ -70,13 +65,12 @@ class PlayState extends FlxState
 	{
 		object.visible = false;
 		score += enemyPointValue;
-		txtScore.text = "Score: " + score;
+		gameHud.setScore(score);
 	}
 
 	private function onTimeComplete(timer:FlxTimer):Void
 	{
 		ticks++;
-		txtTime.text = "Time: " + ticks;
 
 		if (ticks >= levelTime)
 		{
