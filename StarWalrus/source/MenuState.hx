@@ -1,5 +1,6 @@
 package;
 
+import audio.SoundManager;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -56,6 +57,9 @@ class MenuState extends FlxState
 		add(txtInstructions);
 
 		FlxTween.tween(star, {x: 0}, 1.0, {ease: FlxEase.quadIn, onComplete: onStarAnimateIn});
+
+		SoundManager.instance.playFanfareMusic();
+		SoundManager.instance.playWhooshSound(0.75);
 	}
 
 	private function onStarAnimateIn(tween:FlxTween):Void
@@ -64,6 +68,8 @@ class MenuState extends FlxState
 		FlxG.camera.flash(FlxColor.WHITE, 0.25, onFlashComplete);
 		FlxG.camera.shake();
 		background.visible = true;
+
+		SoundManager.instance.playTingSound();
 	}
 
 	private function onFlashComplete():Void
@@ -88,5 +94,7 @@ class MenuState extends FlxState
 		{
 			FlxG.switchState(new PlayState());
 		});
+
+		SoundManager.instance.playClickSound();
 	}
 }

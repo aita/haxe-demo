@@ -33,6 +33,35 @@
 	<source path="source" />
 	<assets path="assets" />
 
+	<assets path="assets">
+		<music path="audio/music_fanfare.mp3" id="music_fanfare" if="flash" />
+		<music path="audio/music_fanfare.ogg" id="music_fanfare" unless="flash" />
+
+		<music path="audio/music_ingame.mp3" id="music_ingame" if="flash" />
+		<music path="audio/music_ingame.ogg" id="music_ingame" unless="flash" />
+
+		<sound path="audio/sound_whoosh.mp3" id="sound_whoosh" if="flash" />
+		<sound path="audio/sound_whoosh.ogg" id="sound_whoosh" unless="flash" />
+
+		<sound path="audio/sound_ting.mp3" id="sound_ting" if="flash" />
+		<sound path="audio/sound_ting.ogg" id="sound_ting" unless="flash" />
+
+		<sound path="audio/sound_click.mp3" id="sound_click" if="flash" />
+		<sound path="audio/sound_click.ogg" id="sound_click" unless="flash" />
+
+		<sound path="audio/sound_damage.mp3" id="sound_damage" if="flash" />
+		<sound path="audio/sound_damage.ogg" id="sound_damage" unless="flash" />
+
+		<sound path="audio/sound_explosion1.mp3" id="sound_explosion1" if="flash" />
+		<sound path="audio/sound_explosion1.ogg" id="sound_explosion1" unless="flash" />
+
+		<sound path="audio/sound_explosion2.mp3" id="sound_explosion2" if="flash" />
+		<sound path="audio/sound_explosion2.ogg" id="sound_explosion2" unless="flash" />
+
+		<sound path="audio/sound_shoot.mp3" id="sound_shoot" if="flash" />
+		<sound path="audio/sound_shoot.ogg" id="sound_shoot" unless="flash" />
+	</assets>
+
 	<!-- _______________________________ Libraries ______________________________ -->
 
 	<haxelib name="flixel" />

@@ -1,5 +1,6 @@
 package;
 
+import audio.SoundManager;
 import flixel.FlxSprite;
 import flixel.effects.particles.FlxEmitter;
 import flixel.effects.particles.FlxParticle;
@@ -98,10 +99,14 @@ class ExplosionEffect extends FlxGroup
 		var flipBulb:Float = Math.random();
 		if (flipBulb < 0.5)
 		{
+			SoundManager.instance.playExplosion(0);
+
 			FlxTween.tween(explosionBulb.scale, {x: 1, y: 1}, 0.15, {ease: FlxEase.quadIn, onComplete: showSmoke});
 		}
 		else
 		{
+			SoundManager.instance.playExplosion(1);
+
 			FlxTween.tween(explosionBulb.scale, {x: 1, y: -1}, 0.15, {ease: FlxEase.quadIn, onComplete: showSmoke});
 		}
 	}

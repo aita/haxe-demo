@@ -1,6 +1,7 @@
 package;
 
 import AssetPaths;
+import audio.SoundManager;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
@@ -159,6 +160,8 @@ class Player extends FlxGroup
 		});
 
 		muzzleFlash.playFlash(sprite.x, sprite.y);
+
+		SoundManager.instance.playShootSound();
 	}
 
 	public function killPlayer():Void

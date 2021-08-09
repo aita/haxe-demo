@@ -1,5 +1,6 @@
 package;
 
+import audio.SoundManager;
 import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxState;
@@ -76,6 +77,8 @@ class PlayState extends FlxState
 		levelTimer = new FlxTimer();
 		// levelTimer.start(1, onTimeComplete, levelTime);
 		levelTimer.start(1, onTimeComplete, 0);
+
+		SoundManager.instance.playInGameMusic();
 	}
 
 	override public function destroy():Void
@@ -112,6 +115,8 @@ class PlayState extends FlxState
 			FlxG.camera.flash(FlxColor.RED, 0.15);
 			health--;
 			gameHud.setHealth(health);
+			SoundManager.instance.playDamageSound();
+
 			if (health == 0)
 			{
 				player.killPlayer();

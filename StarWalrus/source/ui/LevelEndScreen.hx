@@ -2,6 +2,7 @@ package ui;
 
 import AssetPaths;
 import Reg;
+import audio.SoundManager;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -88,12 +89,16 @@ class LevelEndScreen extends FlxState
 
 		FlxTween.tween(windowHeader, {x: FlxG.width / 2 - windowHeader.width / 2 - 19}, 1.5, {ease: FlxEase.quadIn, onComplete: onHeaderAnimateIn});
 		FlxG.camera.flash(FlxColor.WHITE, 0.25);
+
+		SoundManager.instance.playFanfareMusic();
+		SoundManager.instance.playWhooshSound(1);
 	}
 
 	private function onHeaderAnimateIn(tween:FlxTween):Void
 	{
 		FlxG.camera.shake();
 		windowGroup.visible = true;
+		SoundManager.instance.playTingSound();
 	}
 
 	override public function update(elapsed:Float):Void
@@ -103,6 +108,10 @@ class LevelEndScreen extends FlxState
 
 	private function onPlayAgain():Void
 	{
-		FlxG.resetState();
+		FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+		{
+			FlxG.resetState();
+		});
+		SoundManager.instance.playClickSound();
 	}
 }
