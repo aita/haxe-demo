@@ -50,4 +50,15 @@ class GameHUD extends FlxGroup
 	{
 		txtScore.text = "SCORE: " + score;
 	}
+
+	public function setHealth(health:Int):Void
+	{
+		for (i in 0...healthHearts.length)
+		{
+			if (i > (health - 1))
+			{
+				healthHearts[i].loadGraphic(AssetPaths.healthHeartOff__png);
+			}
+		}
+	}
 }
