@@ -11,6 +11,8 @@ import flixel.tweens.FlxTween;
 import flixel.ui.FlxButton;
 import flixel.util.FlxColor;
 import flixel.util.FlxSpriteUtil;
+import ui.StringIDs;
+import ui.Strings;
 
 /**
  * A FlxState which can be used for the game's menu.
@@ -28,6 +30,7 @@ class MenuState extends FlxState
 	override public function create():Void
 	{
 		super.create();
+		Strings.instance.init();
 
 		background = new FlxSprite();
 		background.loadGraphic(AssetPaths.titleScreenBackground__png);
@@ -47,7 +50,7 @@ class MenuState extends FlxState
 		add(logo);
 
 		txtInstructions = new FlxText(0, 0, 500);
-		txtInstructions.text = "- TAP TO START -";
+		txtInstructions.text = Strings.instance.getValue(StringIDs.TAP_TO_START);
 		txtInstructions.setFormat(AssetPaths.BebasNeue__otf, 72, FlxColor.WHITE, "center");
 		txtInstructions.setBorderStyle(FlxTextBorderStyle.OUTLINE, FlxColor.BLACK, 3);
 

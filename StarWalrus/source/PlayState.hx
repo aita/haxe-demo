@@ -18,8 +18,7 @@ class PlayState extends FlxState
 
 	private var gameHud:GameHUD;
 
-	private var enemyLayer:FlxGroup;
-	private var numEnemies:Int = 20;
+	private var enemyLayer:EnemySpawner;
 	private var score:Int = 0;
 	private var enemyPointValue:Int = 155;
 
@@ -44,7 +43,7 @@ class PlayState extends FlxState
 		background.velocity.x = backgroundScrollSpeed;
 		add(background);
 
-		enemyLayer = new FlxGroup();
+		enemyLayer = new EnemySpawner();
 		add(enemyLayer);
 
 		player = new Player();
@@ -66,13 +65,6 @@ class PlayState extends FlxState
 			explosions.add(explosionEffect);
 		}
 		playerLayer.add(explosions);
-
-		var enemy:Enemy;
-		for (i in 0...numEnemies)
-		{
-			enemy = new Enemy();
-			enemyLayer.add(enemy);
-		}
 
 		levelTimer = new FlxTimer();
 		// levelTimer.start(1, onTimeComplete, levelTime);
@@ -100,7 +92,7 @@ class PlayState extends FlxState
 	private function onProjectileCollision(projectile:FlxObject, enemy:FlxObject):Void
 	{
 		projectile.kill();
-		if (enemy.x < (FlxG.stage.stageWidth - 10) && Std.is(enemy, Enemy))
+		if (enemy.x < (FlxG.stage.stageWidth - 10) && Std.isOfType(enemy, Enemy))
 		{
 			killEnemy(cast(enemy, Enemy));
 			updateScore(enemyPointValue);

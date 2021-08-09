@@ -4,6 +4,7 @@ import AssetPaths;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.math.FlxPoint;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
@@ -13,15 +14,10 @@ class Enemy extends FlxSprite
 	private var movementTween:FlxTween;
 
 	private var spawnTimer:FlxTimer;
-	private var maxSpawnTime:Float = 14;
 
-	private var minSpeed:Float = 2.0;
-	private var maxSpeed:Float = 3.5;
-
-	private var maxX:Int = 750;
-	private var minX:Int = 0;
-	private var maxY:Int = 500;
-	private var minY:Int = 0;
+	private var movementSpeed:Float;
+	private var movementPattern:Dynamic;
+	private var movementPoints:Array<FlxPoint>;
 
 	public function new()
 	{
@@ -37,30 +33,35 @@ class Enemy extends FlxSprite
 		animation.play("Idle");
 
 		spawnTimer = new FlxTimer();
-		resetSpawn();
 	}
 
 	private function resetSpawn(tween:FlxTween = null):Void
 	{
-		visible = false;
-		this.alpha = 1;
-		setPosition(FlxG.width + width, 0);
-
-		var spawnTime:Float = Math.random() * (maxSpawnTime + 1);
-		spawnTimer.start(spawnTime, onSpawn);
 		this.solid = true;
+		this.alpha = 1;
+		this.kill();
+	}
+
+	public function startPattern(speed:Float, pattern:Dynamic):Void
+	{
+		movementSpeed = speed;
+		movementPattern = pattern;
+		movementPoints = new Array<FlxPoint>();
+
+		var point:FlxPoint;
+		for (i in 0...movementPattern.points.length)
+		{
+			point = new FlxPoint(movementPattern.points[i][0], movementPattern.points[i][1]);
+			movementPoints.push(point);
+		}
+
+		spawnTimer.start(movementPattern.startDelay, onSpawn);
+		setPosition(FlxG.stage.stageWidth + width, movementPattern.startY);
 	}
 
 	private function onSpawn(timer:FlxTimer):Void
 	{
-		visible = true;
-
-		var randomY:Int = (Math.floor(Math.random() * (maxY - minY + 1)) + minY);
-
-		this.y = randomY;
-
-		var randomSpeed:Float = (Math.random() * (maxSpeed - minSpeed + 1) + minSpeed);
-		movementTween = FlxTween.tween(this, {x: -width}, randomSpeed, {ease: FlxEase.quadIn, onComplete: resetSpawn});
+		movementTween = FlxTween.quadPath(this, movementPoints, movementSpeed, true, {ease: FlxEase.quadIn, onComplete: resetSpawn});
 	}
 
 	public function killEnemy():Void

@@ -25,12 +25,12 @@ class GameHUD extends FlxGroup
 		add(background);
 
 		txtHealthHeader = new FlxText(37, 14, 500);
-		txtHealthHeader.text = "HEALTH:";
+		txtHealthHeader.text = Strings.instance.getValue(StringIDs.HEALTH);
 		txtHealthHeader.setFormat(AssetPaths.BebasNeue__otf, 36, FlxColor.WHITE, "left");
 		add(txtHealthHeader);
 
 		txtScore = new FlxText(62, 52, 500);
-		txtScore.text = "SCORE: " + 0;
+		txtScore.text = Strings.instance.getValue(StringIDs.SCORE) + 0;
 		txtScore.setFormat(AssetPaths.BebasNeue__otf, 30, 0x9d4300, "left");
 		add(txtScore);
 
@@ -48,7 +48,7 @@ class GameHUD extends FlxGroup
 
 	public function setScore(score:Int):Void
 	{
-		txtScore.text = "SCORE: " + score;
+		txtScore.text = Strings.instance.getValue(StringIDs.SCORE) + score;
 	}
 
 	public function setHealth(health:Int):Void

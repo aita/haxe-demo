@@ -60,18 +60,18 @@ class LevelEndScreen extends FlxState
 		}
 
 		txtGameScore = new FlxText(0, 0, 500);
-		txtGameScore.text = "SCORE: " + score;
+		txtGameScore.text = Strings.instance.getValue(StringIDs.SCORE) + score;
 		txtGameScore.setFormat(AssetPaths.BebasNeue__otf, 72, 0x9d4300, "left");
 		txtGameScore.setPosition(FlxG.width / 2 - txtGameScore.width / 2 + 20, FlxG.height / 2 - txtGameScore.height + 24);
 		windowGroup.add(txtGameScore);
 
 		txtBestScore = new FlxText(0, 0, 500);
-		txtBestScore.text = "BEST SCORE: " + Reg.score;
+		txtBestScore.text = Strings.instance.getValue(StringIDs.BEST_SCORE) + Reg.score;
 		txtBestScore.setFormat(AssetPaths.BebasNeue__otf, 48, 0xffd800, "left");
 		txtBestScore.setPosition(FlxG.width / 2 - 210, FlxG.height / 2 - 2);
 		windowGroup.add(txtBestScore);
 
-		btnPlayAgain = new FlxButton(0, 0, "PLAY AGAIN", onPlayAgain);
+		btnPlayAgain = new FlxButton(0, 0, Strings.instance.getValue(StringIDs.PLAY_AGAIN), onPlayAgain);
 		btnPlayAgain.loadGraphic(AssetPaths.button__png);
 		btnPlayAgain.label.setFormat(AssetPaths.BebasNeue__otf, 47, FlxColor.WHITE, "center");
 		btnPlayAgain.label.setBorderStyle(FlxTextBorderStyle.OUTLINE, 0x9d4300, 3);
